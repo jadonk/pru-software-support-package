@@ -1,7 +1,7 @@
-From fb9eb8131e1d4b3240cfb87ce2af4ddcc8c823d2 Mon Sep 17 00:00:00 2001
+From 1af12d84ca813162bc6d7071433937b2d005e6fd Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Thu, 15 May 2014 19:04:03 -0500
-Subject: [PATCH 15/21] remoteproc/pruss: add a remoteproc driver for PRUSS in
+Subject: [PATCH 14/21] remoteproc/pruss: add a remoteproc driver for PRUSS in
  TI SoCs
 
 The Programmable Real-Time Unit Subsystem (PRUSS) consists of

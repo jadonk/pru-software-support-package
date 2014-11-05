@@ -1,4 +1,4 @@
-From d9a379429625ff673e04b6e80d45d376278f3916 Mon Sep 17 00:00:00 2001
+From f623c08b61f0dfcd9d2a7a295a8dd75617ac7519 Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Fri, 30 May 2014 20:15:17 -0500
 Subject: [PATCH 09/21] Documentation: dt: add PRUSS remoteproc bindings

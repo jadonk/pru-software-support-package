@@ -1,7 +1,7 @@
-From ee10e49735f1015d40e51f310c5337e641185cc5 Mon Sep 17 00:00:00 2001
+From 963c7dfa493f0d9f33af4eb9cf2b119c72ceadf3 Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Wed, 4 Jun 2014 16:13:11 -0500
-Subject: [PATCH 21/21] remoteproc/pruss: add support for PRU-ICSS1 on AM437x
+Subject: [PATCH 19/21] remoteproc/pruss: add support for PRU-ICSS1 on AM437x
  SoCs
 
 Enhance the PRUSS remoteproc driver to support the PRU-ICSS1

@@ -1,4 +1,4 @@
-From 1e562841db37cf3803bc6a2f9201cc27b2f88223 Mon Sep 17 00:00:00 2001
+From 3cdc1927dbf06f5ac3f448ee9cac46615fde970f Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Fri, 16 May 2014 16:28:19 -0500
 Subject: [PATCH 01/21] rpmsg: compute number of buffers to allocate from

@@ -1,7 +1,7 @@
-From 2e4167d1fe9ca5ee97fc7bee87972f070ed5b6b1 Mon Sep 17 00:00:00 2001
+From 8d5de3fe8fcf7086209406b66d727facdc815604 Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Mon, 19 May 2014 17:21:12 -0500
-Subject: [PATCH 05/21] remoteproc/core: add a rproc ops for performing
+Subject: [PATCH 04/21] remoteproc/core: add a rproc ops for performing
  address translation
 
 The rproc_da_to_va API is currently used to perform any device to

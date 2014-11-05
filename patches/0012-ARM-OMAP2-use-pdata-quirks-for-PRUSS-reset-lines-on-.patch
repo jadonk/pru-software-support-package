@@ -1,7 +1,7 @@
-From 8ca6f8ab19b1821f4ac22a40c012ecb6bcce4698 Mon Sep 17 00:00:00 2001
+From 282171232bd0286650abdb1358acddeee1b11fc6 Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Thu, 15 May 2014 12:17:15 -0500
-Subject: [PATCH 13/21] ARM: OMAP2+: use pdata quirks for PRUSS reset lines on
+Subject: [PATCH 12/21] ARM: OMAP2+: use pdata quirks for PRUSS reset lines on
  AM335x
 
 The omap_device API is needed to perform the reset management for

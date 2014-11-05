@@ -1,7 +1,7 @@
-From 5bd7c0f00e13b6f2088cd4ec75708a96d1ced48c Mon Sep 17 00:00:00 2001
+From 07d94c73a8536112dc0f62de656e1e74f5f4fe5f Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Thu, 15 May 2014 20:08:04 -0500
-Subject: [PATCH 04/21] remoteproc: add support to handle device specific
+Subject: [PATCH 03/21] remoteproc: add support to handle device specific
  resource types
 
 The remoteproc framework handles a fixed set of resource table entries

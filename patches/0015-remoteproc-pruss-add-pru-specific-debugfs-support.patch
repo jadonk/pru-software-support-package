@@ -1,7 +1,7 @@
-From a7b20c23434955d2aa9e2c0f3f2596489bbf16c0 Mon Sep 17 00:00:00 2001
+From 640488c713f60131fb1a1f00a13f630893dfb57f Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Thu, 29 May 2014 17:51:48 -0500
-Subject: [PATCH 16/21] remoteproc/pruss: add pru-specific debugfs support
+Subject: [PATCH 15/21] remoteproc/pruss: add pru-specific debugfs support
 
 The remoteproc core driver creates certain standard debugfs
 entries, that does not give a whole lot of useful information

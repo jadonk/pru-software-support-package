@@ -1,4 +1,4 @@
-From a8472840d4b6c1d9c53e95e68f52c3c1614944eb Mon Sep 17 00:00:00 2001
+From f8e5a06fdf73428416238b3fd2c1732dbb9a688b Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Thu, 15 May 2014 19:37:31 -0500
 Subject: [PATCH 02/21] remoteproc: use a flag to detect the presence of IOMMU
@@ -41,7 +41,7 @@ index feb803e..1cdbd05 100644
  	platform_set_drvdata(pdev, rproc);
  
 diff --git a/drivers/remoteproc/remoteproc_core.c b/drivers/remoteproc/remoteproc_core.c
-index d1d00a7..2f846f3 100644
+index cb8bd30..5322409 100644
 --- a/drivers/remoteproc/remoteproc_core.c
 +++ b/drivers/remoteproc/remoteproc_core.c
 @@ -95,19 +95,8 @@ static int rproc_enable_iommu(struct rproc *rproc)
@@ -67,10 +67,10 @@ index d1d00a7..2f846f3 100644
  	}
  
 diff --git a/include/linux/remoteproc.h b/include/linux/remoteproc.h
-index 9422256..fd1b406 100644
+index b40ed9c..aa6ae96 100644
 --- a/include/linux/remoteproc.h
 +++ b/include/linux/remoteproc.h
-@@ -404,6 +404,7 @@ enum rproc_crash_type {
+@@ -442,6 +442,7 @@ enum rproc_crash_type {
   * @table_ptr: pointer to the resource table in effect
   * @cached_table: copy of the resource table
   * @table_csum: checksum of the resource table
@@ -78,7 +78,7 @@ index 9422256..fd1b406 100644
   * @fw_version: human readable version information extracted from f/w
   */
  struct rproc {
-@@ -436,6 +437,7 @@ struct rproc {
+@@ -474,6 +475,7 @@ struct rproc {
  	struct resource_table *table_ptr;
  	struct resource_table *cached_table;
  	u32 table_csum;

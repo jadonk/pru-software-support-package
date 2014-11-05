@@ -1,4 +1,4 @@
-From f309dd7efc694e135989c3366f3524d747605440 Mon Sep 17 00:00:00 2001
+From 6eab5d85a5a2efd387c34c5b42f08b1b024c2c6f Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Mon, 19 May 2014 17:15:03 -0500
 Subject: [PATCH 08/21] ARM: dts: AM33xx: Add PRU mboxes to mailbox node
@@ -18,10 +18,10 @@ Signed-off-by: Suman Anna <s-anna@ti.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/boot/dts/am33xx.dtsi b/arch/arm/boot/dts/am33xx.dtsi
-index 2b66e67..e069b6c 100644
+index 269d88f..13091f6 100644
 --- a/arch/arm/boot/dts/am33xx.dtsi
 +++ b/arch/arm/boot/dts/am33xx.dtsi
-@@ -372,8 +372,8 @@
+@@ -353,8 +353,8 @@
  			ti,hwmods = "mailbox";
  			ti,mbox-num-users = <4>;
  			ti,mbox-num-fifos = <8>;

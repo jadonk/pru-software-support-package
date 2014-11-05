@@ -1,7 +1,7 @@
-From 7460d157078980324986c300b932f896f179fedd Mon Sep 17 00:00:00 2001
+From 2e7a31173ec7e9fc5ee7cba7ff5e9abaa704d0fb Mon Sep 17 00:00:00 2001
 From: Tony Lindgren <tony@atomide.com>
 Date: Mon, 25 Nov 2013 15:17:09 -0800
-Subject: [PATCH 12/21] ARM: OMAP2+: Add support for board specific auxdata
+Subject: [PATCH 07/21] ARM: OMAP2+: Add support for board specific auxdata
  quirks
 
 Looks like some boards need to fill in the auxdata before

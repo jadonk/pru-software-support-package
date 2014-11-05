@@ -1,4 +1,4 @@
-From d5156650dcc4caa7575bd0625cc9496b157f69d9 Mon Sep 17 00:00:00 2001
+From 3ac1a011cb745defa0b650c177865b931fe977b9 Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Thu, 15 May 2014 22:01:53 -0500
 Subject: [PATCH 10/21] ARM: dts: AM33xx: Add the PRUSS DT node
@@ -19,11 +19,11 @@ Signed-off-by: Suman Anna <s-anna@ti.com>
  1 file changed, 31 insertions(+)
 
 diff --git a/arch/arm/boot/dts/am33xx.dtsi b/arch/arm/boot/dts/am33xx.dtsi
-index e069b6c..08040ec 100644
+index 13091f6..895ed20 100644
 --- a/arch/arm/boot/dts/am33xx.dtsi
 +++ b/arch/arm/boot/dts/am33xx.dtsi
-@@ -801,6 +801,37 @@
- 			resets = <&prcm 1>;
+@@ -772,6 +772,37 @@
+ 			clock-names = "fck";
  		};
  
 +		pruss: pruss@4a300000 {

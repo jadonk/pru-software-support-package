@@ -1,4 +1,4 @@
-From b58fe44a1eb2e1a9add1cfce256013211fc2be9c Mon Sep 17 00:00:00 2001
+From 05e6737c4db7619a8a17eb29c7f53755677f3ea9 Mon Sep 17 00:00:00 2001
 From: Suman Anna <s-anna@ti.com>
 Date: Mon, 5 May 2014 15:02:04 -0500
 Subject: [PATCH 11/21] remoteproc/pruss: define platform data for PRU

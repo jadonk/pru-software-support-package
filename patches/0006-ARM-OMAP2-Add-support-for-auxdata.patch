@@ -1,7 +1,7 @@
-From 771430374d64238146361ed9ec54b467004f996e Mon Sep 17 00:00:00 2001
+From 98a67f46428cc2fc0f5c2ad27c353b949e150e55 Mon Sep 17 00:00:00 2001
 From: Tony Lindgren <tony@atomide.com>
 Date: Thu, 10 Oct 2013 15:45:12 -0700
-Subject: [PATCH 07/21] ARM: OMAP2+: Add support for auxdata
+Subject: [PATCH 06/21] ARM: OMAP2+: Add support for auxdata
 
 For few things we're still going to be needing platform
 data for device tree based drivers. Let's set up auxdata
@@ -29,10 +29,10 @@ Conflicts:
  3 files changed, 12 insertions(+), 6 deletions(-)
 
 diff --git a/arch/arm/mach-omap2/board-generic.c b/arch/arm/mach-omap2/board-generic.c
-index 7b16833..9a655c7 100644
+index 07d923e..f8a790c 100644
 --- a/arch/arm/mach-omap2/board-generic.c
 +++ b/arch/arm/mach-omap2/board-generic.c
-@@ -36,10 +36,7 @@ static struct of_device_id omap_dt_match_table[] __initdata = {
+@@ -53,10 +53,7 @@ static void __init legacy_init_ehci_clk(char *clkname)
  
  static void __init omap_generic_init(void)
  {
@@ -42,13 +42,13 @@ index 7b16833..9a655c7 100644
 -	pdata_quirks_init();
 +	pdata_quirks_init(omap_dt_match_table);
  
- 	omapdss_init_of();
- }
+ 	/*
+ 	 * HACK: call display setup code for selected boards to enable omapdss.
 diff --git a/arch/arm/mach-omap2/common.h b/arch/arm/mach-omap2/common.h
-index 065585e..94484be 100644
+index 38131f6..9c44142 100644
 --- a/arch/arm/mach-omap2/common.h
 +++ b/arch/arm/mach-omap2/common.h
-@@ -321,7 +321,7 @@ static inline void omap5_cpu_resume(void)
+@@ -309,7 +309,7 @@ static inline void omap5_cpu_resume(void)
  
  #endif
  
