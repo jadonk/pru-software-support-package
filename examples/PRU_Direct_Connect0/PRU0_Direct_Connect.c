@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdint.h>
-#include <intc.h>
+#include <pru_intc.h>
 #include "rsc_table_pru0.h"
 
 #define PRU0

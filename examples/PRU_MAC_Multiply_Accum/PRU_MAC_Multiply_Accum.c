@@ -55,6 +55,7 @@ void main(){
 	uint32_t i;
 	uint16_t numMacs = NUMMACS; // Arbitrary number
 	uint64_t result = 0;
+	volatile uint64_t storeValue = 0;
 	operands buf[NUMMACS];
 
 	for (i = 0; i < 256; i++){
@@ -66,6 +67,8 @@ void main(){
 	for (i = 0; i < numMacs; i++){
 		result += (uint64_t)buf[i].op1 * (uint64_t)buf[i].op2;
 	}
+
+	storeValue = result;
 
 	/* Nothing to do so halt */
 	__halt();

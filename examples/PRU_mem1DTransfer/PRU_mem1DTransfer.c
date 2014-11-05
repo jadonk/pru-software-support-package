@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdint.h>
-#include <cfg.h>
-#include <ctrl.h>
+#include <pru_cfg.h>
+#include <pru_ctrl.h>
 
 volatile register uint32_t __R30;
 volatile register uint32_t __R31;
@@ -52,12 +52,19 @@ far pruCtrl PRU0_CTRL;
 mem1DParams buffer;
 
 #define COPY_LENGTH	32
+#define SIZE		64
 
 void main(){
 	mem1DParams params;
 	uint8_t *srcPtr;
 	uint8_t *dstPtr;
 	uint8_t data;
+	uint8_t srcBuf[SIZE];
+	uint8_t dstBuf[SIZE];
+
+	buffer.cnt = SIZE;
+	buffer.src = &srcBuf;
+	buffer.dst = &dstBuf;
 
 	/* Clear SYSCFG[STANDBY_INIT] to enable OCP master port */
 	CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;

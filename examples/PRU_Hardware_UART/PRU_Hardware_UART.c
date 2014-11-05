@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdint.h>
-#include <uart.h>
+#include <pru_uart.h>
 
 /* Define UART register "overlay" */
 volatile far pruUart CT_UART __attribute__((cregister("UART0", near), peripheral));

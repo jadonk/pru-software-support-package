@@ -68,4 +68,5 @@ SECTIONS {
 	.farbss		>  PRUDMEM, PAGE 1
 	.fardata	>  PRUDMEM, PAGE 1
 	.PRU0_CTRL	>  PRU0_CTRL, PAGE 1
+        .resource_table >  PRUDMEM, PAGE 1
 }

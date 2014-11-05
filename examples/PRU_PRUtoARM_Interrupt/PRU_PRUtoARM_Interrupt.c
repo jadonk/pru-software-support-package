@@ -29,9 +29,9 @@
  * POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdint.h>
-#include <cfg.h>
-#include <intc.h>
-#include <ctrl.h>
+#include <pru_cfg.h>
+#include <pru_intc.h>
+#include <pru_ctrl.h>
 
 volatile register uint32_t __R30;
 volatile register uint32_t __R31;

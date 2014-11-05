@@ -2,7 +2,9 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-CG_TOOL_ROOT := /opt/ti/ga/ccsv6/tools/compiler/pru_2.0.0B2
+SHELL = cmd.exe
+
+CG_TOOL_ROOT := c:/ti/ccsv6/tools/compiler/pru_2.0.0B2
 
 ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
@@ -12,8 +14,8 @@ $(GEN_CMDS__FLAG) \
 
 -include ../makefile.init
 
-RM := rm -rf
-RMDIR := rm -rf
+RM := DEL /F
+RMDIR := RMDIR /S/Q
 
 # All of the sources participating in the build are defined here
 -include sources.mk
@@ -125,13 +127,13 @@ all: PRU_ARMtoPRU_Interrupt.out
 PRU_ARMtoPRU_Interrupt.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: PRU Linker'
-	"/opt/ti/ga/ccsv6/tools/compiler/pru_2.0.0B2/bin/clpru" -v3 -g --define=am3359 --define=pru0 --diag_warning=225 --display_error_number --diag_wrap=off --endian=little -z -m"PRU_ARMtoPRU_Interrupt.map" --heap_size=0x100 --stack_size=0x100 -i"/opt/ti/ga/ccsv6/tools/compiler/pru_2.0.0B2/lib" -i"/opt/ti/ga/ccsv6/tools/compiler/pru_2.0.0B2/include" --reread_libs --warn_sections --xml_link_info="PRU_ARMtoPRU_Interrupt_linkInfo.xml" --rom_model -o "PRU_ARMtoPRU_Interrupt.out" $(ORDERED_OBJS)
+	"c:/ti/ccsv6/tools/compiler/pru_2.0.0B2/bin/clpru" -v3 -g --define=am3359 --define=pru0 --diag_warning=225 --display_error_number --diag_wrap=off --endian=little -z -m"PRU_ARMtoPRU_Interrupt.map" --heap_size=0x100 --stack_size=0x100 -i"c:/ti/ccsv6/tools/compiler/pru_2.0.0B2/lib" -i"c:/ti/ccsv6/tools/compiler/pru_2.0.0B2/include" --reread_libs --warn_sections --xml_link_info="PRU_ARMtoPRU_Interrupt_linkInfo.xml" --rom_model -o "PRU_ARMtoPRU_Interrupt.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 PRU_ARMtoPRU_Interrupt.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: PRU Hex Utility'
-	"/opt/ti/ga/ccsv6/tools/compiler/pru_2.0.0B2/bin/hexpru"  -o "PRU_ARMtoPRU_Interrupt.hex" $(EXE_OUTPUTS__QUOTED)
+	"c:/ti/ccsv6/tools/compiler/pru_2.0.0B2/bin/hexpru"  -o "PRU_ARMtoPRU_Interrupt.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 

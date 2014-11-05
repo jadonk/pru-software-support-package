@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdint.h>
-#include <cfg.h>
-#include <ctrl.h>
+#include <pru_cfg.h>
+#include <pru_ctrl.h>
 
 /* Mapping Constant table registers to variables */
 volatile far pruCfg CT_CFG __attribute__((cregister("CFG", near), peripheral));

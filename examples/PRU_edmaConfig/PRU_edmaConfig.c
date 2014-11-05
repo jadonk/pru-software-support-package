@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE. */
 
 #include <stdint.h>
-#include <cfg.h>
+#include <pru_cfg.h>
 
 volatile register uint32_t __R30;
 volatile register uint32_t __R31;
@@ -114,9 +114,6 @@ volatile pruCfg CT_CFG __attribute__((cregister("CFG", near), peripheral));
 #pragma LOCATION(buf, 0)
 hostBuffer buf;
 
-/* PRU-to-ARM interrupt */
-#define PRU0_ARM_INTERRUPT ((19-16)+32)
-
 /* Addresses for Constant Table pointer registers
  * CTBIR_0 -> C24 (PRU0 DRAM)
  * CTBIR_1 -> C25 (PRU1 DRAM)
@@ -126,56 +123,60 @@ hostBuffer buf;
 
 /* EDMA Channel Registers */
 #define EDMA0_CC_BASE	((volatile uint32_t *)(0x49000000))
-#define DMAQNUM0	0x0240
-#define QUEPRI		0x0284
-#define EMR		0x0300
-#define EMCR		0x0308
-#define EMCRH		0x030C
-#define QEMCR		0x0314
-#define CCERRCLR	0x031C
-#define DRAE0		0x0340
-#define DRAE1		0x0348
-#define DRAE2		0x0350
-#define DRAE3		0x0358
-#define QWMTHRA		0x0620
-#define GLOBAL_ESR	0x1010
-#define GLOBAL_ESRH	0x1014
-#define GLOBAL_EECR	0x1028
-#define GLOBAL_EECRH	0x102C
-#define GLOBAL_SECR	0x1040
-#define GLOBAL_SECRH	0x1044
-#define GLOBAL_IESR	0x1060
-#define GLOBAL_IESRH	0x1064
-#define GLOBAL_ICR	0x1070
-#define GLOBAL_ICRH	0x1074
+#define DMAQNUM0	(0x0240 / 4)
+#define DMAQNUM1	(0x0244 / 4)
+#define DCHMAP_10	(0x0128 / 4)
+#define QUEPRI		(0x0284 / 4)
+#define EMR		(0x0300 / 4)
+#define EMCR		(0x0308 / 4)
+#define EMCRH		(0x030C / 4)
+#define QEMCR		(0x0314 / 4)
+#define CCERRCLR	(0x031C / 4)
+#define DRAE0		(0x0340 / 4)
+#define DRAE1		(0x0348 / 4)
+#define DRAE2		(0x0350 / 4)
+#define DRAE3		(0x0358 / 4)
+#define QWMTHRA		(0x0620 / 4)
+#define GLOBAL_ESR	(0x1010 / 4)
+#define GLOBAL_ESRH	(0x1014 / 4)
+#define GLOBAL_EECR	(0x1028 / 4)
+#define GLOBAL_EECRH	(0x102C / 4)
+#define GLOBAL_SECR	(0x1040 / 4)
+#define GLOBAL_SECRH	(0x1044 / 4)
+#define GLOBAL_IESR	(0x1060 / 4)
+#define GLOBAL_IESRH	(0x1064 / 4)
+#define GLOBAL_ICR	(0x1070 / 4)
+#define GLOBAL_ICRH	(0x1074 / 4)
 
 /* EDMA Shadow Region 1 */
-#define ESR		0x2210
-#define ESRH		0x2214
-#define EECR		0x2228
-#define EECRH		0x222C
-#define SECR		0x2240
-#define SECRH		0x2244
-#define IPR		0x2268
-#define IPRH		0x226C
-#define ICR		0x2270
-#define ICRH		0x2274
-#define IESR		0x2260
-#define IESRH		0x2264
-#define IEVAL		0x2278
-#define IECR		0x2258
-#define IECRH		0x225C
+#define ESR		(0x2210 / 4)
+#define ESRH		(0x2214 / 4)
+#define EESR		(0x1030 / 4)
+#define EECR		(0x2228 / 4)
+#define EECRH		(0x222C / 4)
+#define SECR		(0x2240 / 4)
+#define SECRH		(0x2244 / 4)
+#define IPR		(0x2268 / 4)
+#define IPRH		(0x226C / 4)
+#define ICR		(0x2270 / 4)
+#define ICRH		(0x2274 / 4)
+#define IESR		(0x2260 / 4)
+#define IESRH		(0x2264 / 4)
+#define IEVAL		(0x2278 / 4)
+#define IECR		(0x2258 / 4)
+#define IECRH		(0x225C / 4)
 
 /* EDMA PARAM registers */
-#define PARAM_OFFSET	0x4000
+#define PARAM_OFFSET	(0x4000 / 4)
 #define OPT		0x00
 #define SRC		0x04
-#define A_B_CNT		0x08
+#define ACNT		0x100
+#define BCNT		0x1
 #define DST		0x0C
 #define SRC_DST_BIDX	0x10
 #define LINK_BCNTRLD	0x14
 #define SRC_DST_CIDX	0x18
-#define CCNT		0x1C
+#define CCNT		0x1
 
 
 #define COPY_LENGTH	32
@@ -194,31 +195,38 @@ void main(){
 	CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
 
 	/* Load channel parameters from DRAM - loaded by host */
-	hostData.src = buf.src;
-	hostData.dst = buf.dst;
-	hostData.chan = buf.chan;
+	hostData.src = /*buf.src*/ 0x40300000;
+	hostData.dst = /*buf.dst*/ 0x40300100;
+	hostData.chan = /*buf.chan*/ 10;
+
+	channelMask = (1 << hostData.chan);
+
+	/* Map Channel 10 to PaRAM 10 */
+	ptr[DCHMAP_10] = (hostData.chan << 5);
 
 	/* Setup EDMA region access for Shadow Region 1 */
-	channelMask = (1 << hostData.chan);
-	ptr[DRAE1/4] |= channelMask;
+	ptr[DRAE1] |= channelMask;
 
 	/* Clear channel event from EDMA event registers */
-	ptr[GLOBAL_ESR/4] |= channelMask;
-	ptr[GLOBAL_SECR/4] |= channelMask;
-	ptr[GLOBAL_ICR/4] |= channelMask;
+	ptr[SECR] |= channelMask;
+	ptr[ICR] |= channelMask;
 
 	/* Enable channel interrupt */
-	ptr[GLOBAL_IESR/4] |= channelMask;
+	ptr[IESR] |= channelMask;
+
+	/* Enable channel */
+	ptr[EESR] |= channelMask;
 
 	/* Clear event missed register */
-	ptr[EMCR/4] |= channelMask;
+	ptr[EMCR] |= channelMask;
 
 	/* Setup channel to submit to EDMA TC0 */
-	ptr[DMAQNUM0/4] &= 0xFF00FFFF;
+	ptr[DMAQNUM1] &= 0xFFFFF0FF;
 
 	/* Setup and store PaRAM set for transfer */
 	paramOffset = PARAM_OFFSET;
-	paramOffset += hostData.chan << 5; // channel * 0x20
+	/* channel * 0x20, word address */
+	paramOffset += ((hostData.chan << 5) / 4);
 
 	params.lnkrld.link = 0xFFFF;
 	params.lnkrld.bcntrld = 0x0000;
@@ -226,23 +234,22 @@ void main(){
 	params.opt.tcinten = 1;
 	params.opt.itcchen = 1;
 
-	params.ccnt.ccnt = 1;
-	params.abcnt.acnt = 0x100;
-	params.abcnt.bcnt = 0x1;
+	params.ccnt.ccnt = CCNT;
+	params.abcnt.acnt = ACNT;
+	params.abcnt.bcnt = BCNT;
 	params.bidx.srcbidx = 0x1;
 	params.bidx.dstbidx = 0x1;
 	params.src = hostData.src;
 	params.dst = hostData.dst;
 
-	pParams = (volatile edmaParam *)ptr + paramOffset;
+	pParams = (volatile edmaParam *)(ptr + paramOffset);
 	*pParams = params;
 
 	/* Trigger transfer */
-	/*ptr[IEVAL/4] = channelMask;*/ // TH: I think this is useless  - IEVAL only uses bit 0
-	ptr[ESRH/4] = channelMask;
+	ptr[ESR] = (channelMask);
 
 	/* Wait for transfer completion */
-	while (ptr[IPR/4] != hostData.chan){
+	while (!(ptr[IPR] & channelMask)){
 	}
 
 	/* Halt PRU core */
