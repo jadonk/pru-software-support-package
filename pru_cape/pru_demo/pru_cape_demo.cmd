@@ -74,6 +74,8 @@
 --retain=PRU_Switch_image.obj(*)
 --retain=PRU_Audio_image.obj(*)
 --retain=PRU_Hardware_UART_image.obj(*)
+--retain=PRU_HDQ_TempSensor0_image.obj(*)
+--retain=PRU_HDQ_TempSensor1_image.obj(*)
 
 
 /* SPECIFY THE SYSTEM MEMORY MAP */
@@ -97,7 +99,7 @@ SECTIONS
                     RUN_END(bss_end)
     .const   : load > DDR_MEM              /* GLOBAL CONSTANTS              */
     .cinit	 : load > DDR_MEM
-    .stack   : load > 0x87FFF000           /* SOFTWARE SYSTEM STACK         */
+    .stack   : load > DDR_MEM HIGH //0x87FFF000           /* SOFTWARE SYSTEM STACK         */
     LED0_text: {PRU_LED0_image.obj(.text)} load > DDR_MEM run_start(LED0_INST)
     LED0_data: {PRU_LED0_image.obj(.data)} load > DDR_MEM run_start(LED0_DATA)
     LED1_text: {PRU_LED1_image.obj(.text)} load > DDR_MEM run_start(LED1_INST)
@@ -108,4 +110,8 @@ SECTIONS
     AUDIO_data: {PRU_Audio_image.obj(.data)} load > DDR_MEM run_start(AUDIO_DATA)
     HW_UART_text: {PRU_Hardware_UART_image.obj(.text)} load > DDR_MEM run_start(UART_INST)
 	HW_UART_data: {PRU_Hardware_UART_image.obj(.data)} load > DDR_MEM run_start(UART_DATA)
+	TEMPSENSOR0_text: {PRU_HDQ_TempSensor0_image.obj(.text)} load > DDR_MEM run_start(SLAVE_INST)
+    TEMPSENSOR0_data: {PRU_HDQ_TempSensor0_image.obj(.data)} load > DDR_MEM run_start(SLAVE_DATA)
+   	TEMPSENSOR1_text: {PRU_HDQ_TempSensor1_image.obj(.text)} load > DDR_MEM run_start(MASTER_INST)
+    TEMPSENSOR1_data: {PRU_HDQ_TempSensor1_image.obj(.data)} load > DDR_MEM run_start(MASTER_DATA)
 }

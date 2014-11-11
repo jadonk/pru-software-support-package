@@ -45,7 +45,6 @@
 #include "pru.h"
 #include "pru_cape_demo.h"
 
-#define PRODUCTION 	1
 
 /******************************************************************************
 **              FUNCTION DEFINITIONS
@@ -87,6 +86,7 @@ void MainMenu(void)
 	char UART;
 	char Audio;
 	char Switch;
+	char TempSensor;
 
 	char* test="blank";
 	unsigned int validChoice = 0;
@@ -99,12 +99,13 @@ void MainMenu(void)
 
 	while(!validChoice)
 	{
-		ConsoleUtilsPrintf("What test would you like to run?\n");
+		ConsoleUtilsPrintf("\n\nWhat test would you like to run?\n\n");
 		ConsoleUtilsPrintf("1. LEDs\n");
 		ConsoleUtilsPrintf("2. Switches\n");
 		ConsoleUtilsPrintf("3. Audio\n");
 		ConsoleUtilsPrintf("4. Uart\n");
-		ConsoleUtilsPrintf("5. All\n");
+		ConsoleUtilsPrintf("5. Temp sensor\n");
+		ConsoleUtilsPrintf("6. All\n");
 		ConsoleUtilsGets(choice, 3);
 
 		switch(choice[0])
@@ -131,6 +132,11 @@ void MainMenu(void)
 
 			break;
 		case '5':
+			test = "Temp sensor";
+			ConsoleUtilsPrintf("\nYou chose %s\n", test);
+			TempSensor = HDQTest();
+			break;
+		case '6':
 			test = "All";
 			ConsoleUtilsPrintf("\nYou chose %s\n", test);
 			ConsoleUtilsPrintf("\nRunning all tests, loading... \n");
@@ -145,6 +151,9 @@ void MainMenu(void)
 			PRUICSSReset();
 
 			UART = UARTTest();
+			PRUICSSReset();
+
+			TempSensor = HDQTest();
 			PRUICSSReset();
 
 			ConsoleUtilsPrintf("\n\n\n**************************************************************\n");
@@ -170,6 +179,11 @@ void MainMenu(void)
 				ConsoleUtilsPrintf("\nUART Pass");
 			else
 				ConsoleUtilsPrintf("\nUART Fail");
+
+			if((TempSensor =='y') || (TempSensor =='Y'))
+				ConsoleUtilsPrintf("\nTemp Sensor Pass");
+			else
+				ConsoleUtilsPrintf("\nTemp Sensor Fail");
 
 			ConsoleUtilsPrintf("\n\n\n");
 
@@ -242,6 +256,41 @@ int SwitchTest(void)
 	ConsoleUtilsGets(answer, 3);
 
 	PRUHalt(PRU_ICSS1, PRU0);
+
+	return(answer[0]);
+}
+
+//******************************************************************************
+//    Temp Sensor Test
+//      This function tests the temp sensor on the PRU Cape. If the temperature
+//      rises, a red LED will turn on.  If the temperature falls, a blue LED
+//      will turn on.
+//******************************************************************************
+int HDQTest(void)
+{
+	char answer[1];
+
+	ConsoleUtilsPrintf("\n**************************************************************\n");
+	ConsoleUtilsPrintf("\n                     	 TEMP SENSOR TEST                            \n");
+	ConsoleUtilsPrintf("\n**************************************************************\n");
+
+	ConsoleUtilsPrintf("\nLoading PRU Instructions and Data.\n");
+
+	PRUMemLoad(PRU_ICSS1, PRU0_IRAM, 0, sizeof(SLAVE_INST), (unsigned int*)SLAVE_INST);
+	PRUMemLoad(PRU_ICSS1, PRU0_DRAM, 0, sizeof(SLAVE_DATA), (unsigned int*)SLAVE_DATA);
+
+	PRUMemLoad(PRU_ICSS1, PRU1_IRAM, 0, sizeof(MASTER_INST), (unsigned int*)MASTER_INST);
+	PRUMemLoad(PRU_ICSS1, PRU1_DRAM, 0, sizeof(MASTER_DATA), (unsigned int*)MASTER_DATA);
+
+	PRUEnable(PRU_ICSS1, PRU1);
+	PRUEnable(PRU_ICSS1, PRU0);
+
+	ConsoleUtilsPrintf("\nDoes the red and blue LEDs light up during heating and \n cooling the temperature sensor? y/n\n");
+
+	ConsoleUtilsGets(answer, 3);
+
+	PRUHalt(PRU_ICSS1, PRU0);
+	PRUHalt(PRU_ICSS1, PRU1);
 
 	return(answer[0]);
 }
@@ -463,18 +512,10 @@ void PRUCapePinmux(void)
 	//						    	TEMP SENSOR
 	//******************************************************************************
 
-
-#ifdef PRODUCTION
 	//*********************************************
 	// TEMP1 HDQ/1W output = PR1_PRU_EDIO_DATA_OUT5
 	//*********************************************
 	HWREG(SOC_CONTROL_REGS + CONTROL_CONF_LCD_AC_BIAS_EN) =  AM335X_PIN_INPUT | CONTROL_CONF_MUXMODE(4);
-#else
-	//*********************************************
-	// TEMP1 HDQ/1W output = PR1_PRU_EDIO_DATA_OUT7
-	//*********************************************
-	HWREG(SOC_CONTROL_REGS + CONTROL_CONF_LCD_DATA(7)) =  AM335X_PIN_INPUT | CONTROL_CONF_MUXMODE(4);
-#endif
 
 	//*********************************************
 	// TEMP1 HDQ/1W input = PR1_PRU0_GPI14

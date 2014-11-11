@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -l"rtsv7A8_A_le_eabi.lib" -l"drivers.lib" -l"utils.lib" -l"platform.lib" -l"system.lib"
+LIBS := -l"rtsv7A8_A_le_eabi.lib" -l"drivers.lib" -l"utils.lib" -l"system.lib" -l"platform.lib"
 

@@ -1,7 +1,7 @@
 ******************************************************************************
                      PRU Linker PC v2.1.0                      
 ******************************************************************************
->> Linked Wed Nov 05 16:43:26 2014
+>> Linked Tue Nov 11 13:50:02 2014
 
 OUTPUT FILE NAME:   <PRU_Switch.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_noexit"  address: 00000000

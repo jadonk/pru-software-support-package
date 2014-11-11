@@ -1,7 +1,7 @@
 ******************************************************************************
                      PRU Linker PC v2.1.0                      
 ******************************************************************************
->> Linked Wed Nov 05 16:43:16 2014
+>> Linked Tue Nov 11 13:50:09 2014
 
 OUTPUT FILE NAME:   <PRU_Hardware_UART.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_noexit"  address: 00000000

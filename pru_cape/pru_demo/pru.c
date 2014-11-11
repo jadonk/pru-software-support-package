@@ -43,7 +43,7 @@
 #include "hw_pru_ctrl.h"
 #include "hw_cm_per.h"
 #include "hw_types.h"
-#include "delay.h"
+#include <string.h>
 
 //******************************************************************************
 //    PRU ICSS Init
@@ -66,6 +66,7 @@ void PRUICSSInit(void)
 	PRUMemFill((SOC_PRUICSS1_REGS + SOC_PRUICSS_PRU1_DRAM_OFFSET),8*1024,0 );	 //Data 8KB RAM1
 	PRUMemFill((SOC_PRUICSS1_REGS + SOC_PRUICSS_PRU0_IRAM_OFFSET),8*1024,0 );
 	PRUMemFill((SOC_PRUICSS1_REGS + SOC_PRUICSS_PRU1_IRAM_OFFSET),8*1024,0 );
+
 }
 
 //******************************************************************************
@@ -75,12 +76,9 @@ void PRUICSSInit(void)
 //******************************************************************************
 void PRUMemFill(unsigned int StartAddress, unsigned int Length , unsigned int  Pattern)
 {
-  unsigned int tempCount = 0;
-  for(tempCount = 0; tempCount < (Length / 4 ) ; tempCount++ )
-  {
-    /* Loading the pattern into the memory */
-    HWREG(StartAddress + (tempCount*4)) = Pattern;
-  }
+
+	memset((unsigned char*)StartAddress, Pattern, (Length/4));
+
 }
 
 //******************************************************************************
@@ -89,7 +87,7 @@ void PRUMemFill(unsigned int StartAddress, unsigned int Length , unsigned int  P
 //******************************************************************************
 void PRUMemLoad(unsigned int PRUICSSInstance, unsigned int MemoryType, unsigned int offset, unsigned int Length ,const unsigned int *Pointer)
 {
- 	unsigned int tempCount, BaseAddress, StartAddress;
+ 	unsigned int BaseAddress, StartAddress;
 
  	if(PRUICSSInstance == 1)
  		BaseAddress = SOC_PRUICSS1_REGS;
@@ -105,22 +103,14 @@ void PRUMemLoad(unsigned int PRUICSSInstance, unsigned int MemoryType, unsigned 
  	if(MemoryType == PRU_SHARED_RAM)
  		StartAddress = BaseAddress + SOC_PRUICSS_SHARED_RAM_OFFSET;
 
-  unsigned char *srcaddr;
-  unsigned char *destaddr;
-  unsigned char data;
+ 	unsigned char *srcaddr;
+ 	unsigned char *destaddr;
 
-  srcaddr = (unsigned char*)Pointer;
-  destaddr =(unsigned char*)StartAddress;
+ 	srcaddr = (unsigned char*)Pointer;
+ 	destaddr =(unsigned char*)StartAddress;
 
-  for(tempCount=0; tempCount<Length; tempCount++)
-  {
-	data = *srcaddr;
+ 	memcpy(destaddr, srcaddr, Length);
 
-	*destaddr = data;
-
-    srcaddr++;
-    destaddr++;
-  }
 }
 
 //******************************************************************************
@@ -165,7 +155,7 @@ void PRUHalt(unsigned int PRUICSSInstance, unsigned int PRUCore){
  		BaseAddress = SOC_PRUICSS1_REGS;
 
 	if(PRUCore == 0)
-		HWREG(BaseAddress + SOC_PRUICSS_PRU0_CTRL_OFFSET + PRU_CTRL_CONTROL) = 0x0;  //*((unsigned int*) 0x4a322000) = 0x0;
+		HWREG(BaseAddress + SOC_PRUICSS_PRU0_CTRL_OFFSET + PRU_CTRL_CONTROL) = 0x0;
 	if(PRUCore == 1)
-		HWREG(BaseAddress + SOC_PRUICSS_PRU1_CTRL_OFFSET + PRU_CTRL_CONTROL) = 0x0;  //*((unsigned int*) 0x4a324000) = 0x0;
+		HWREG(BaseAddress + SOC_PRUICSS_PRU1_CTRL_OFFSET + PRU_CTRL_CONTROL) = 0x0;
 }

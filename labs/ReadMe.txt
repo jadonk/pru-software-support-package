@@ -22,7 +22,8 @@ WHAT LABS ARE INCLUDED?
 
        LAB 1:  Toggle LED with PRU GPO
        LAB 2:  Read Push Button Switch on PRU0 GPI & Toggle LED with PRU1 GPO
-
+       LAB 3:  Design a Temperature Monitor Application with the PRU
+       LAB 4:  Introduction to Linux Driver
 
 
 ADDITIONAL RESOURCES

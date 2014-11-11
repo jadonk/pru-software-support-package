@@ -4,6 +4,8 @@
 	<comment></comment>
 	<projects>
 		<project>PRU_Audio</project>
+		<project>PRU_HDQ_TempSensor0</project>
+		<project>PRU_HDQ_TempSensor1</project>
 		<project>PRU_Hardware_UART</project>
 		<project>PRU_LED0</project>
 		<project>PRU_LED1</project>
@@ -33,27 +35,43 @@
 		<link>
 			<name>PRU_Audio_image.obj</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/pru_fw/PRU_Audio/Debug/PRU_Audio_image.obj</locationURI>
+			<locationURI>PRU_SW_ROOT/pru_cape/pru_fw/PRU_Audio/Debug/PRU_Audio_image.obj</locationURI>
+		</link>
+		<link>
+			<name>PRU_HDQ_TempSensor0_image.obj</name>
+			<type>1</type>
+			<locationURI>PRU_SW_ROOT/pru_cape/pru_fw/PRU_HDQ_TempSensor0/Debug/PRU_HDQ_TempSensor0_image.obj</locationURI>
+		</link>
+		<link>
+			<name>PRU_HDQ_TempSensor1_image.obj</name>
+			<type>1</type>
+			<locationURI>PRU_SW_ROOT/pru_cape/pru_fw/PRU_HDQ_TempSensor1/Debug/PRU_HDQ_TempSensor1_image.obj</locationURI>
 		</link>
 		<link>
 			<name>PRU_Hardware_UART_image.obj</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/pru_fw/PRU_Hardware_UART/Debug/PRU_Hardware_UART_image.obj</locationURI>
+			<locationURI>PRU_SW_ROOT/pru_cape/pru_fw/PRU_Hardware_UART/Debug/PRU_Hardware_UART_image.obj</locationURI>
 		</link>
 		<link>
 			<name>PRU_LED0_image.obj</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/pru_fw/PRU_LED0/Debug/PRU_LED0_image.obj</locationURI>
+			<locationURI>PRU_SW_ROOT/pru_cape/pru_fw/PRU_LED0/Debug/PRU_LED0_image.obj</locationURI>
 		</link>
 		<link>
 			<name>PRU_LED1_image.obj</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/pru_fw/PRU_LED1/Debug/PRU_LED1_image.obj</locationURI>
+			<locationURI>PRU_SW_ROOT/pru_cape/pru_fw/PRU_LED1/Debug/PRU_LED1_image.obj</locationURI>
 		</link>
 		<link>
 			<name>PRU_Switch_image.obj</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/pru_fw/PRU_Switch/Debug/PRU_Switch_image.obj</locationURI>
+			<locationURI>PRU_SW_ROOT/pru_cape/pru_fw/PRU_Switch/Debug/PRU_Switch_image.obj</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>PRU_SW_ROOT</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D</value>
+		</variable>
+	</variableList>
 </projectDescription>

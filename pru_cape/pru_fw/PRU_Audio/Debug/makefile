@@ -133,7 +133,7 @@ PRU_Audio.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 
 PRU_Audio_image.obj: $(EXE_OUTPUTS)
 	@echo 'Invoking: PRU Hex Utility'
-	"c:/ti/ccsv6/tools/compiler/pru_2.1.0/bin/hexpru" --ti_txt -o "PRU_Audio_image.obj" $(EXE_OUTPUTS__QUOTED) T:/workdir/pru/pru_cape/pru_fw/PRU_Audio/PRU_HexUtil.cmd
+	"c:/ti/ccsv6/tools/compiler/pru_2.1.0/bin/hexpru" --ti_txt -o "PRU_Audio_image.obj" $(EXE_OUTPUTS__QUOTED) C:/temp/pru/pru_cape/pru_fw/PRU_Audio/PRU_HexUtil.cmd
 	@echo 'Finished building: $@'
 	@echo ' '
 

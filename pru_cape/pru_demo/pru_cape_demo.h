@@ -58,6 +58,10 @@ extern const unsigned char AUDIO_INST[0x1000];
 extern const unsigned char AUDIO_DATA[0x1000];
 extern const unsigned char UART_INST[0x1000];
 extern const unsigned char UART_DATA[0x1000];
+extern const unsigned char SLAVE_INST[0x1000];
+extern const unsigned char SLAVE_DATA[0x1000];
+extern const unsigned char MASTER_INST[0x1000];
+extern const unsigned char MASTER_DATA[0x1000];
 
 /*****************************************************************************
 **                    Macro definitions
@@ -89,6 +93,7 @@ void MainMenu(void);
 int LEDTest(void);
 int SwitchTest(void);
 int AudioTest(void);
+int HDQTest(void);
 int UARTTest(void);
 void UARTInit(void);
 void PRUCapePinmux(void);

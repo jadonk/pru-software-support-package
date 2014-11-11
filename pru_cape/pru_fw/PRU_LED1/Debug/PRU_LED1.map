@@ -1,7 +1,7 @@
 ******************************************************************************
                      PRU Linker PC v2.1.0                      
 ******************************************************************************
->> Linked Wed Nov 05 16:43:23 2014
+>> Linked Tue Nov 11 13:50:11 2014
 
 OUTPUT FILE NAME:   <PRU_LED1.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_noexit"  address: 00000000

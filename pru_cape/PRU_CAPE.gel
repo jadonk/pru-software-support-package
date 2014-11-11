@@ -20,9 +20,6 @@ menuitem "PRU_CAPE"
 #define AM335X_PIN_INPUT_PULLUP         (AM335X_INPUT_EN | AM335X_PULL_UP)
 #define AM335X_PIN_INPUT_PULLDOWN       (AM335X_INPUT_EN)
 
-/* BBB PRU Cape version */
-#define PRODUCTION 	1
-
 hotmenu PRU_Cape_Init()
 {
 	PRU_PINMUX_Config();
@@ -133,19 +130,8 @@ hotmenu PRU_PINMUX_Config()
 	// TEMP1 HDQ/1W input = pr1_pru0_gpi14 (GPMC_AD14 - mode 6)
 	*((unsigned int*) 0x44E10838) =  AM335X_PIN_INPUT | 6;
 
-	if(PRODUCTION == 1){
-
-		// TEMP1 HDQ/1W output = pr1_pru_edio_data_out5 (LCD_AC_BIAS_EN - mode 4)
+	// TEMP1 HDQ/1W output = pr1_pru_edio_data_out5 (LCD_AC_BIAS_EN - mode 4)
 		*((unsigned int*) 0x44E108EC) =  AM335X_PIN_OUTPUT | 4;
-
-	}
-
-	if(PRODUCTION == 0){
-
-		// TEMP1 HDQ/1W output = pr1_pru_edio_data_out7 (LCD_DATA7 - mode 4)
-		*((unsigned int*) 0x44E108BC) =  AM335X_PIN_OUTPUT | 4;
-
-	}
 
 }
 
