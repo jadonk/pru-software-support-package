@@ -115,28 +115,8 @@ struct my_resource_table {
 #pragma RETAIN(am335x_pru_remoteproc_ResourceTable)
 struct my_resource_table am335x_pru_remoteproc_ResourceTable = {
 	1,	/* we're the first version that implements this */
-	1,	/* number of entries in the table */
+	0,	/* number of entries in the table */
 	0, 0,	/* reserved, must be zero */
-	/* offsets to entries */
-	{
-		offsetof(struct my_resource_table, pru_ints),
-	},
-
-	{
-		TYPE_CUSTOM, TYPE_PRU_INTS,
-		sizeof(struct fw_rsc_custom_ints),
-		{ /* PRU_INTS version */
-		  0x0000,
-		  /* Channel-to-host mapping, 255 for unused */
-		  HOST_UNUSED, HOST_UNUSED, HOST_UNUSED, HOST_UNUSED,
-		  HOST_UNUSED, HOST_UNUSED, HOST_UNUSED, HOST_UNUSED,
-		  HOST_UNUSED, HOST_UNUSED,
-		  /* Number of evts being mapped to channels */
-		  (sizeof(pru_intc_map) / sizeof(struct ch_map)),
-		  /* Pointer to the structure containing mapped events */
-		  pru_intc_map,
-		},
-	},
 };
 
 #endif /* _RSC_TABLE_AM335X_PRU_H_ */
